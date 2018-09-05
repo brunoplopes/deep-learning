@@ -1,0 +1,1355 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{RegressaoLogisticaComRedesNeurais}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Regressão Logística com Redes
+Neurais}\label{regressuxe3o-loguxedstica-com-redes-neurais}
+
+Bem-vindo ao seu primeiro programa valendo nota!! Você irá construir um
+classificador com regressão logística paa reconhecer gatos. Este
+exercício irá te mostrar como fazer esta tarefa levando em conta apenas
+redes neurais, de forma a te dar idéias também sobre aplicações
+considerando deep learning.
+
+\textbf{Instruções:} - Não utilize loops (for/while) em seu código, a
+menos que você seja explicitamente indicado a fazê-lo.
+
+\textbf{O que você vai aprender:} - Construir uma estrutura geral de um
+algoritmo de aprendizado, incluindo: - Parâmetros de inicialização. -
+Calcular a função de custo e seu gradiente. - Utilizar um algoritmo de
+otimização (gradiente descendente) - Colocar estas funções juntas em um
+modelo, na ordem correta.
+
+    \subsection{1 - Pacotes}\label{pacotes}
+
+Primeiro, vamos executar a célula abaixo para importar todos os pacotes
+necessários para completar a terefa. - \href{www.numpy.org}{numpy} é o
+pacote de computação científica fundamental em Python. -
+\href{http://www.h5py.org}{h5py} é um pacote comum para interagir com um
+arquivo de dados no formato H5. -
+\href{http://matplotlib.org}{matplotlib} é uma biblioteca para plotar
+gráficos em Python. -
+\href{http://www.pythonware.com/products/pil/}{PIL} e
+\href{https://www.scipy.org/}{scipy} são usados aqui para testar o
+modelo utilizando uma imagem fornecida por você ao final.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{h5py}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{ndimage}
+        \PY{k+kn}{from} \PY{n+nn}{lr\PYZus{}utils} \PY{k}{import} \PY{n}{load\PYZus{}dataset}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsection{2 - Visão Geral da Tarefa}\label{visuxe3o-geral-da-tarefa}
+
+\textbf{Problema}: você tem uma base de dados ("data.h5") que contém: -
+um conjunto de treinamento contendo m\_train imagens classificadas como
+gato (y=1) ou não-gato (y=0) - um conjunto de teste de m\_test imagens
+classificadas em gato ou não-gato - cada imagem tem o formato (num\_px,
+num\_px, 3) onde 3 é o número de canais da imagem (RGB). Portanto, cada
+imagem é quadrada (altura = num\_px) e (largura = num\_px).
+
+Você irá construir um algoritmo simples de reconhecimento de imagens que
+será capaz de classificar corretamente imagens de gatos ou não-gatos.
+
+Vamos nos familiarizar com a base de dados. Carregue o arquivo de dados
+executando a célula abaixo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Carregando os dados (cat/non\PYZhy{}cat)}
+        \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{p}{,} \PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Foi adicionado "\_orig" ao final da base de dados de imagens
+(treinamento e teste) porque iremos pré processá-las. Após o pré
+processamento, teremos as bases train\_set\_x e test\_set\_x (as
+classificações train\_set\_y e test\_set\_y não necessitam de pré
+processamento).
+
+Cada linha do arquivo train\_set\_x\_orig e test\_set\_x\_orig é um
+array representando uma imagem. Você pode visualizar um exemplo
+executando o código da célula abaixo. Fique a vontade para modificar o
+valor de \texttt{indice} e execute novamente para ver outras imagens.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Exemplo de imagem da base de dados}
+        \PY{n}{indice} \PY{o}{=} \PY{l+m+mi}{27}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{p}{[}\PY{n}{indice}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{indice}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, é uma imagem }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{classes}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{indice}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y = [1], é uma imagem 'cat'
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Muitos problemas no desenvolvimento de software em deep learning
+aparecem devido ao fato de matriz/vetor que possuem dimensões que não
+são regulares. Se você quiser manter as dimensões matriz/vetor corretas
+você irá precisar de algum tempo eliminando erros no código.
+
+\textbf{Exercício:} Encontre os valores para: - m\_train (número de
+exemplos de treinamento) - m\_test (número de exemplos de teste) -
+num\_px (= altura = altura das imagens de treinamento) Lembre-se que
+\texttt{train\_set\_x\_orig} é um array numpy no formato (m\_train,
+num\_px, num\_px, 3). Por exemplo, você pode acessar \texttt{m\_train}
+escrevendo \texttt{train\_set\_x\_orig.shape{[}0{]}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 3 linhas de código)}
+        \PY{n}{m\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{m\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{num\PYZus{}px} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Número de exemplos de treinamento: m\PYZus{}train = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m\PYZus{}train}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Número de exemplos de teste: m\PYZus{}test = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m\PYZus{}test}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Altura/Largura de cada imagem: num\PYZus{}px = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cada imagem tem o formato: (}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, 3)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}x formato: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}y formato: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}x formato: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}y formato: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Número de exemplos de treinamento: m\_train = 209
+Número de exemplos de teste: m\_test = 50
+Altura/Largura de cada imagem: num\_px = 64
+Cada imagem tem o formato: (64, 64, 3)
+train\_set\_x formato: (209, 64, 64, 3)
+train\_set\_y formato: (1, 209)
+test\_set\_x formato: (50, 64, 64, 3)
+test\_set\_y formato: (1, 50)
+
+    \end{Verbatim}
+
+    \textbf{Saída esperada para m\_train, m\_test e num\_px}:
+
+\begin{verbatim}
+<td>**m_train**</td>
+<td> 209 </td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**m_test**</td>
+<td> 50 </td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**num_px**</td>
+<td> 64 </td> 
+\end{verbatim}
+
+    Por conveniência, você pode reformatar as imagens do formato (num\_px,
+num\_px, 3) em um array numpy no formato (num\_px \(*\) num\_px \(*\) 3,
+1). Após isto, sua base de treinamento e teste é um array numpy onde
+cada coluna representa uma imagem "desenrolada". O arquivo deverá ter
+m\_train (respectivamente m\_test) colunas.
+
+\textbf{Exercício:} Reformate o conjunto de treinamento e tete de forma
+que cada imagem no formato (num\_px, num\_px, 3) seja transformada em um
+único vetor no formato (num\_px \(*\) num\_px \(*\) 3, 1).
+
+Um truque para quando você quer vetorizar um matriz do formato (a,b,c,d)
+para um vetor no formato (b\(*\)c\(*\)d, a) utilize:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X_flatten }\OperatorTok{=}\NormalTok{ X.reshape(X.shape[}\DecValTok{0}\NormalTok{], }\OperatorTok{-}\DecValTok{1}\NormalTok{).T      }\CommentTok{# X.T é a matriz transposta de X}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Reformate os exemplos de treinamento e de teste}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 linhas de código)}
+        \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}flatten} \PY{o}{=} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}x\PYZus{}flatten FORMATO: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}y FORMATO: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}x\PYZus{}flatten FORMATO: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}y FORMATO: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{verificação após a vetorização: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_set\_x\_flatten FORMATO: (12288, 209)
+train\_set\_y FORMATO: (1, 209)
+test\_set\_x\_flatten FORMATO: (12288, 50)
+test\_set\_y FORMATO: (1, 50)
+verificação após a vetorização: [17 31 56 22 33]
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<td>**train_set_x_flatten formato**</td>
+<td> (12288, 209)</td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**train_set_y formato**</td>
+<td>(1, 209)</td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**test_set_x_flatten formato**</td>
+<td>(12288, 50)</td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**test_set_y formato**</td>
+<td>(1, 50)</td> 
+\end{verbatim}
+
+\textbf{verificação após a vetorização}
+
+{[}17 31 56 22 33{]}
+
+    Para representar as imagens coloridas, os canais vermelho, verde e azul
+(RGB) devem ser especificados para cada pixel, logo o valor do pixel é
+um vetor com 3 valores, cada um entre 0 e 255.
+
+Uma etapa comum de pré processamento em aprendizado de máquina está
+relacionada a centrar e normalizar a base de dados, isto é, subtrair a
+média do array numpy e divida cada valor pelo desvio padrão de todo o
+array numpy. Para bases de dados de imagens é mais simples e conveniente
+e acaba funcionando quase da mesma forma, divida cada valor do pixel por
+255 (o valor máximo do pixel em cada canal).
+
+Vamos normalizar a base de dados.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{train\PYZus{}set\PYZus{}x} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{/}\PY{l+m+mf}{255.}
+        \PY{n}{test\PYZus{}set\PYZus{}x} \PY{o}{=} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{/}\PY{l+m+mf}{255.}
+\end{Verbatim}
+
+
+     \textbf{O que você precisa lembrar:}
+
+Etapas comuns no pré processamento de um conjunto de dados: - Determinar
+as dimensões e formatos utilizados no problema (m\_train, m\_test,
+num\_px, ...) - Reformatar a base de dados de forma que cada exemplo
+esteja com o formato de um vetor de tamanho (num\_px * num\_px * 3, 1) -
+"Normalizar" os dados
+
+    \subsection{3 - Arquitetura Geral de um algoritmo de
+aprendizado}\label{arquitetura-geral-de-um-algoritmo-de-aprendizado}
+
+É tempo de projetar um algoritmo simples que classifique imagens como
+gato ou não-gato.
+
+Você irá construir uma Regressão Logística utilizando uma rede neural. A
+figura abaixo mostra porque a \textbf{Regressão Logística é, na verdade,
+um modelo simples de Rede Neural!}
+
+\textbf{Expressão Matemática do Algoritmo}:
+
+Para um exemplo \(x^{(i)}\): \[z^{(i)} = w^T x^{(i)} + b \tag{1}\]
+\[\hat{y}^{(i)} = a^{(i)} = sigmoid(z^{(i)})\tag{2}\]
+\[ \mathcal{L}(a^{(i)}, y^{(i)}) =  - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})\tag{3}\]
+
+O custo é então determinado pela soma sobre todos os exemplos de
+treinamento:
+\[ J = \frac{1}{m} \sum_{i=1}^m \mathcal{L}(a^{(i)}, y^{(i)})\tag{4}\]
+
+\textbf{Etapas chave}: Neste exercício, você irá executar as seguintes
+etapas: - Inicializar os parâmetros do modelo. - Aprender os parâmetros
+para o modelo através da minimização do custo.\\
+- Utilizar os parâmetros aprendidos para fazer predições (no conjunto de
+teste) - Analise os resultados e conclua.
+
+    \subsection{4 - Partes do nosso
+algoritmo}\label{partes-do-nosso-algoritmo}
+
+As etapas principais para se construir uma rede neural são: 1. Definir a
+estrutura do modelo (por exemplo, o número de características da
+entrada) 2. Inicializar os parâmetros do modelo. 3. Loop: - Calcular a
+perda atual (propagação para frente) - Calcular o gradiente atual
+(propagação para trás) - Atualizar os parâmetros (gradiente descendente)
+
+Normalmente se constroem as funções de 1 a 3 separadamente e faz-se a
+integração delas em uma única função chamada de \texttt{modelo()}.
+
+\subsubsection{4.1 - Funções auxiliares}\label{funuxe7uxf5es-auxiliares}
+
+\textbf{Exercício}: Utilizando o código do "Python Basico", implemente
+\texttt{sigmoid()}. Como você pode ver na figura a cima, você irá
+precisar calcular
+\(sigmoid( w^T x + b) = \frac{1}{1 + e^{-(w^T x + b)}}\) para fazer as
+predições. Use np.exp().
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} FUNÇÃO DE AVALIAÇÃO: sigmoid}
+        
+        \PY{k}{def} \PY{n+nf}{sigmoid}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Computa o valor do sigmoid de z}
+        
+        \PY{l+s+sd}{    Argumentos:}
+        \PY{l+s+sd}{    z \PYZhy{}\PYZhy{} Um escalar ou array numpy de qualquer tamanho.}
+        
+        \PY{l+s+sd}{    Retorna:}
+        \PY{l+s+sd}{    s \PYZhy{}\PYZhy{} sigmoid(z)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 linha de código)}
+            \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{z}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+            
+            \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sigmoid([0, 2]) = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sigmoid([0, 2]) = [0.5        0.88079708]
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<td>**sigmoid([0, 2])**</td>
+<td> [ 0.5         0.88079708]</td> 
+\end{verbatim}
+
+    \subsubsection{4.2 - Parâmetros de
+inicialização}\label{paruxe2metros-de-inicializauxe7uxe3o}
+
+\textbf{Exercício:} Implemente a inicialização de parâmetros na célula
+abaixo. Você deve inicializar w como um vetor de zeros. Se você não sabe
+qual função do numpy utilizar, de uma olhada em np.zeros() na
+documentação da biblioteca numpy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} FUNÇÃO DE AVALIAÇÃO: inicializacao\PYZus{}com\PYZus{}zeros}
+        
+        \PY{k}{def} \PY{n+nf}{inicializacao\PYZus{}com\PYZus{}zeros}\PY{p}{(}\PY{n}{dim}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Esta função cria um vetor de zeros no formato (dim, 1) para w e inicializa b com 0.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Argumento:}
+        \PY{l+s+sd}{    dim \PYZhy{}\PYZhy{} tamanho do vetor w que se deseja (ou, neste caso, número de parâmetros)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Retorna:}
+        \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} vetor inicializado com zeros no formato (dim, 1)}
+        \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} valor escalar inicializado com zero (corresponde ao bias)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 linha de código)}
+            \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{dim}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+        
+            \PY{k}{assert}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{n}{dim}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{k}{assert}\PY{p}{(}\PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n+nb}{float}\PY{p}{)} \PY{o+ow}{or} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n+nb}{int}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{w}\PY{p}{,} \PY{n}{b}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{dim} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{w}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{inicializacao\PYZus{}com\PYZus{}zeros}\PY{p}{(}\PY{n}{dim}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+w = [[0.]
+ [0.]]
+b = 0
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<tr>
+    <td>  ** w **  </td>
+    <td> [[ 0.]
+\end{verbatim}
+
+{[} 0.{]}{]}
+
+\begin{verbatim}
+</tr>
+<tr>
+    <td>  ** b **  </td>
+    <td> 0 </td>
+</tr>
+\end{verbatim}
+
+Para entradas do tipo imagem, w terá a forma (num\_px \(\times\) num\_px
+\(\times\) 3, 1).
+
+    \subsubsection{4.3 - Propagação para frente e para
+trás}\label{propagauxe7uxe3o-para-frente-e-para-truxe1s}
+
+Agora que os parâmetros foram inicializados, é possível realizar as
+propagações para frente e para trás de forma a aprender os parâmetros.
+
+\textbf{Exercício:} Implemente a função \texttt{propagar()} que
+determina a função custo e o seu gradiente.
+
+\textbf{Dicas}:
+
+Propagação para frente: - Com o valor de X - Determine
+\(A = \sigma(w^T X + b) = (a^{(0)}, a^{(1)}, ..., a^{(m-1)}, a^{(m)})\)
+- e calcule a função custo:
+\(J = -\frac{1}{m}\sum_{i=1}^{m}y^{(i)}\log(a^{(i)})+(1-y^{(i)})\log(1-a^{(i)})\)
+
+As fórmulas que você irá utilizar estão indicadas abaixo:
+
+\[ \frac{\partial J}{\partial w} = \frac{1}{m}X(A-Y)^T\tag{5}\]
+\[ \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m (a^{(i)}-y^{(i)})\tag{6}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} FUNÇÃO DE AVALIAÇÃO: propagate}
+         
+         \PY{k}{def} \PY{n+nf}{propagar}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Implemente a função custo e o seu gradiente para a propagação explicada acima.}
+         
+         \PY{l+s+sd}{    Argumentos:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} pesos, um array numpy de tamanho (num\PYZus{}px * num\PYZus{}px * 3, 1)}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} bias, um escalar}
+         \PY{l+s+sd}{    X \PYZhy{}\PYZhy{} dados no formato (num\PYZus{}px * num\PYZus{}px * 3, número de exemplos)}
+         \PY{l+s+sd}{    Y \PYZhy{}\PYZhy{} vetor de saída com a classificação correta de cada imagem (contém 0 se for não\PYZhy{}gato, 1 se for gato) }
+         \PY{l+s+sd}{         no formato (1, número de exemplos)}
+         
+         \PY{l+s+sd}{    Retorna:}
+         \PY{l+s+sd}{    custo \PYZhy{}\PYZhy{} o valor do custo por regressão logística}
+         \PY{l+s+sd}{    dw \PYZhy{}\PYZhy{} gradiente da perda em relação a w, portanto possui o formato de w}
+         \PY{l+s+sd}{    db \PYZhy{}\PYZhy{} gradiente da perda com relação a b, portanto possui o formato de b}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Dicas:}
+         \PY{l+s+sd}{    \PYZhy{} Escreva seu código passo a passo para a propagação. np.log(), np.dot()}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} PROPAGAÇÃO PARA FRENTE (DE X PARA O CUSTO)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 linhas de código)}
+                                          \PY{c+c1}{\PYZsh{} determina a ativação}
+                                          \PY{c+c1}{\PYZsh{} determina o custo}
+             \PY{n}{z} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)} \PY{o}{+} \PY{n}{b}
+             \PY{n}{A} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+             \PY{n}{custo} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{/} \PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{Y} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{Y}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{A}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)} 
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} PROPAGAÇÃO PARA TRÁS (DETERMINAÇÃO DO GRADIENTE)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 linhas de código)}
+             \PY{n}{dw} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X} \PY{p}{,} \PY{p}{(}\PY{n}{A} \PY{o}{\PYZhy{}} \PY{n}{Y}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{n}{db} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{A} \PY{o}{\PYZhy{}} \PY{n}{Y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{k}{assert}\PY{p}{(}\PY{n}{dw}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{db}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n+nb}{float}\PY{p}{)}
+             \PY{n}{custo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{custo}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{custo}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{grads} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{dw}\PY{p}{,}
+                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{db}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{grads}\PY{p}{,} \PY{n}{custo}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{2.}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{2.}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,}\PY{l+m+mf}{2.}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{3.}\PY{p}{,}\PY{l+m+mf}{4.}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.2}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{grads}\PY{p}{,} \PY{n}{custo} \PY{o}{=} \PY{n}{propagar}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{custo = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{custo}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dw = [[0.99845601]
+ [2.39507239]]
+db = 0.001455578136784208
+custo = 5.801545319394553
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<tr>
+    <td>  ** dw **  </td>
+  <td> [[ 0.99845601]
+ [ 2.39507239]]</td>
+</tr>
+<tr>
+    <td>  ** db **  </td>
+    <td> 0.00145557813678 </td>
+</tr>
+<tr>
+    <td>  ** custo **  </td>
+    <td> 5.801545319394553 </td>
+</tr>
+\end{verbatim}
+
+    \subsubsection{d) Otimização}\label{d-otimizauxe7uxe3o}
+
+\begin{itemize}
+\tightlist
+\item
+  Você já inicializou os parâmetros.
+\item
+  Você também já determinou o custo e seu gradiente.
+\item
+  Agora, falta atualizar os parâmetros utilizando o gradiente
+  descendente.
+\end{itemize}
+
+\textbf{Exercício:} Escreva a função de otimização. O objetivo é
+aprender \(w\) e \(b\) minimizando a função de custo \(J\). Para um
+parâmetro \(\theta\), a regra de atualização é: \$ \theta = \theta -
+\alpha \text{ } d\theta\$, onde \(\alpha\) é a taxa de aprendizado.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} FUNÇÃO DE AVALIAÇÃO: otimizar}
+         
+         \PY{k}{def} \PY{n+nf}{otimizar}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Esta função otimiza w e b através do algoritmo gradiente descendente}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Argumentos:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} pesos, um array numpy no formato (num\PYZus{}px * num\PYZus{}px * 3, 1)}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} bias, um escalar}
+         \PY{l+s+sd}{    X \PYZhy{}\PYZhy{} dados no formato (num\PYZus{}px * num\PYZus{}px * 3, número de exemplos)}
+         \PY{l+s+sd}{    Y \PYZhy{}\PYZhy{} vetor de saída com a classificação correta ( 0 se for não\PYZhy{}gato, 1 se for gato) no formato (1, número de exemplos)}
+         \PY{l+s+sd}{    num\PYZus{}iterations \PYZhy{}\PYZhy{} número de interações do loop de otimização.}
+         \PY{l+s+sd}{    learning\PYZus{}rate \PYZhy{}\PYZhy{} taxa de aprendizado utilizada pela regra do gradiente descendente.}
+         \PY{l+s+sd}{    print\PYZus{}cost \PYZhy{}\PYZhy{} True para imprimir a perda a cada 100 interações}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Retorna:}
+         \PY{l+s+sd}{    params \PYZhy{}\PYZhy{} dicionário contendo os pesos w e o bias b}
+         \PY{l+s+sd}{    grads \PYZhy{}\PYZhy{} dicionário contendo os gradientes dos pesos e bias com relação a função custo}
+         \PY{l+s+sd}{    custos \PYZhy{}\PYZhy{} lista de todos os custos computados durante a otimizacao, isto será utilizado para imprimir a curva de aprendizado.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Dicas:}
+         \PY{l+s+sd}{    Você basicamente precisa escrever as duas etapas e interar entre elas:}
+         \PY{l+s+sd}{        1) Calcule o custo e o gradiente para os parâmetros atuais. Use propagar().}
+         \PY{l+s+sd}{        2) Atualize os parâmetros utilizando a regra do gradiente descendente para w e b.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{custos} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+                 
+                 
+                 \PY{c+c1}{\PYZsh{} Calculo do custo e do gradiente (≈ 1\PYZhy{}4 linhas de código)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} }
+                 \PY{n}{grads}\PY{p}{,} \PY{n}{custo} \PY{o}{=} \PY{n}{propagar}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+                 
+                 \PY{c+c1}{\PYZsh{} Recupere as derivativas dos gradientes}
+                 \PY{n}{dw} \PY{o}{=} \PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 \PY{n}{db} \PY{o}{=} \PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{} regra de atualização (≈ 2 linhas de código)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{}}
+                 \PY{n}{w} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{learning\PYZus{}rate} \PY{o}{*} \PY{n}{dw} 
+                 \PY{n}{b} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{learning\PYZus{}rate} \PY{o}{*} \PY{n}{db}
+             
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+                 
+                 \PY{c+c1}{\PYZsh{} armazena os custos}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{custos}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{custo}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Imprime os custosa cada 100 interações no conjunto de treinamento}
+                 \PY{k}{if} \PY{n}{print\PYZus{}cost} \PY{o+ow}{and} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Custo após a interação }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{custo}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{w}\PY{p}{,}
+                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{b}\PY{p}{\PYZcb{}}
+             
+             \PY{n}{grads} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{dw}\PY{p}{,}
+                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{db}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{params}\PY{p}{,} \PY{n}{grads}\PY{p}{,} \PY{n}{custos}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{params}\PY{p}{,} \PY{n}{grads}\PY{p}{,} \PY{n}{custos} \PY{o}{=} \PY{n}{otimizar}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.009}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+w = [[0.19033591]
+ [0.12259159]]
+b = 1.9253598300845747
+dw = [[0.67752042]
+ [1.41625495]]
+db = 0.21919450454067652
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<tr>
+   <td> **w** </td>
+   <td>[[ 0.19033591]
+\end{verbatim}
+
+{[} 0.12259159{]}{]}
+
+\begin{verbatim}
+</tr>
+
+<tr>
+   <td> **b** </td>
+   <td> 1.92535983008 </td>
+</tr>
+<tr>
+   <td> **dw** </td>
+   <td> [[ 0.67752042]
+\end{verbatim}
+
+{[} 1.41625495{]}{]}
+
+\begin{verbatim}
+</tr>
+<tr>
+   <td> **db** </td>
+   <td> 0.219194504541 </td>
+</tr>
+\end{verbatim}
+
+    \textbf{Exercício:} A função anterior irá retornar os valores de w e b
+aprendidos. Podemos utilizar os valores de w e b para avaliar a saída
+para um novo conjunto de dados X. Implemente a função \texttt{prever()}.
+Existem duas etapas para fazer uma predição:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Calcular \(\hat{Y} = A = \sigma(w^T X + b)\)
+\item
+  Converter as entradas em 0 (se a ativação for \textless{}= 0.5) ou 1
+  (se a ativação for \textgreater{} 0.5), armazene as previsões em um
+  vetor \texttt{Y\_previsto}. Se você quiser, você pode utilizar um
+  comando \texttt{if}/\texttt{else} no loop \texttt{for} (porém, existe
+  uma forma de vetorizar esta operação).
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} FUNÇÃO DE AVALIAÇÃO: prever}
+         
+         \PY{k}{def} \PY{n+nf}{prever}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Prever se a saída é 0 ou 1 utilizando os parâmetros (w, b) aprendidos na regressão logística}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Argumentos:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} pesos, um array numpy array no formato (num\PYZus{}px * num\PYZus{}px * 3, 1)}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} bias, um escalar}
+         \PY{l+s+sd}{    X \PYZhy{}\PYZhy{} dados, no formato (num\PYZus{}px * num\PYZus{}px * 3, número de exemplos)}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Retorna:}
+         \PY{l+s+sd}{    Y\PYZus{}previsto \PYZhy{}\PYZhy{} um array numpy contendo as previsões (0/1) para os exemplos em X}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             
+             \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{Y\PYZus{}previsto} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+             \PY{n}{w} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Compute o vetor \PYZdq{}A\PYZdq{} prevendo as probabilidades de existir um gato na imagem }
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 linha de código)}
+             \PY{n}{z} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)} \PY{o}{+} \PY{n}{b}
+             \PY{n}{A} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{c+c1}{\PYZsh{} Converta as probabilidades A[0,i] para previsões p[0,i]}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{} (≈ 4 linhas de código)}
+                 \PY{k}{if} \PY{n}{A}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{:}
+                     \PY{n}{Y\PYZus{}previsto}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{else}\PY{p}{:} \PY{n}{Y\PYZus{}previsto}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}  
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{Y\PYZus{}previsto}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{Y\PYZus{}previsto}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.1124579}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.23106775}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{1.2}\PY{p}{,}\PY{l+m+mf}{2.}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{previsões = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{prever}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+previsões = [[1. 1. 0.]]
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<tr>
+     <td>
+         **previsões**
+     </td>
+      <td>
+        [[ 1.  1.  0.]]
+     </td>  
+\end{verbatim}
+
+     \textbf{Lembre-se:} Você implementou várias funções que: - Inicializa
+(w,b) - Otimiza a perda interativamente para aprender os parâmetros
+(w,b): - determina o custo e seu gradiente - atualiza os parâmetros
+utilizando o gradiente descendente - Utiliza os parâmetros aprendidos
+(w,b) para prever a classificação de um novo conjunto de imagens.
+
+    \subsection{5 - Junte todas as funções criando um
+modelo}\label{junte-todas-as-funuxe7uxf5es-criando-um-modelo}
+
+Agora você irá ver como o modelo geral é estruturado colocando todos os
+blocos (funções implementadas anteriormente) juntos e na ordem correta.
+
+\textbf{Exercício:} Implemente a função modelo. Utilize a seguinte
+notação: - Y\_previsto para as previsões no conjunto de teste. -
+Y\_previsto\_train para as previsões no conjunto de treinamento. - w,
+custos, grads para as saídas do otimizar()
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} FUNÇÃO DE AVALIAÇÃO: modelo}
+         
+         \PY{k}{def} \PY{n+nf}{modelo}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}test}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Construa o modelo de regressão logística chamando as funções já implementadas}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Argumentos:}
+         \PY{l+s+sd}{    X\PYZus{}train \PYZhy{}\PYZhy{} conjunto de treinamento representado por um array numpy no formato (num\PYZus{}px * num\PYZus{}px * 3, m\PYZus{}train)}
+         \PY{l+s+sd}{    Y\PYZus{}train \PYZhy{}\PYZhy{} classificação das imagens do conjunto de treinamento representado por um array numpy no formato (1, m\PYZus{}train)}
+         \PY{l+s+sd}{    X\PYZus{}test \PYZhy{}\PYZhy{} conjunto de teste representado por um arra numpy no formato (num\PYZus{}px * num\PYZus{}px * 3, m\PYZus{}test)}
+         \PY{l+s+sd}{    Y\PYZus{}test \PYZhy{}\PYZhy{} classificação das imagens do conjunto de teste representado por um array numpy no formato (1, m\PYZus{}test)}
+         \PY{l+s+sd}{    num\PYZus{}iterations \PYZhy{}\PYZhy{} hyperparametro representando o número de interações para a otimização dos parâmetros}
+         \PY{l+s+sd}{    learning\PYZus{}rate \PYZhy{}\PYZhy{} hyperparametro representando a taxa de aprendizado utilizada na regra de atualização do otimizar()}
+         \PY{l+s+sd}{    print\PYZus{}cost \PYZhy{}\PYZhy{} Ajustado para true para imprimir o custo a cada 100 interações}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Retorna:}
+         \PY{l+s+sd}{    d \PYZhy{}\PYZhy{} dicionário contendo informações sobre o modelo.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} inicialize os parâmetros com zeros (≈ 1 linha de código)}
+             \PY{n}{w}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{inicializacao\PYZus{}com\PYZus{}zeros}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Gradiente descendente (≈ 1 linha de código)}
+             \PY{n}{params}\PY{p}{,} \PY{n}{grads}\PY{p}{,} \PY{n}{custos} \PY{o}{=} \PY{n}{otimizar}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{print\PYZus{}cost}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Recupere os parâmetros w e b do dicionário \PYZdq{}parameters\PYZdq{} (\PYZti{} 2 linhas de código)}
+             \PY{n}{w} \PY{o}{=} \PY{n}{params}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{b} \PY{o}{=} \PY{n}{params}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Prever para os exemplos dos conjuntos de treinamento/teste (≈ 2 linhas de código)}
+             \PY{n}{Y\PYZus{}prediction\PYZus{}train} \PY{o}{=} \PY{n}{prever}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{)}
+             \PY{n}{Y\PYZus{}prediction\PYZus{}test} \PY{o}{=} \PY{n}{prever}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{c+c1}{\PYZsh{} Imprimir os erros para o treinamento/teste}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{precisão no conjunto de treinamento: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Y\PYZus{}prediction\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{Y\PYZus{}train}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{precisão no conjunto de teste: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Y\PYZus{}prediction\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{Y\PYZus{}test}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         
+             
+             \PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{costs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{custos}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}prediction\PYZus{}test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{Y\PYZus{}prediction\PYZus{}test}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}prediction\PYZus{}train}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{Y\PYZus{}prediction\PYZus{}train}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{w}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{b}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{learning\PYZus{}rate}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{num\PYZus{}iterations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{num\PYZus{}iterations}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{d}
+\end{Verbatim}
+
+
+    Execute a célula abaixo para treinar o modelo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{d} \PY{o}{=} \PY{n}{modelo}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.005}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Custo após a interação 0: 0.693147
+Custo após a interação 100: 0.584508
+Custo após a interação 200: 0.466949
+Custo após a interação 300: 0.376007
+Custo após a interação 400: 0.331463
+Custo após a interação 500: 0.303273
+Custo após a interação 600: 0.279880
+Custo após a interação 700: 0.260042
+Custo após a interação 800: 0.242941
+Custo após a interação 900: 0.228004
+Custo após a interação 1000: 0.214820
+Custo após a interação 1100: 0.203078
+Custo após a interação 1200: 0.192544
+Custo após a interação 1300: 0.183033
+Custo após a interação 1400: 0.174399
+Custo após a interação 1500: 0.166521
+Custo após a interação 1600: 0.159305
+Custo após a interação 1700: 0.152667
+Custo após a interação 1800: 0.146542
+Custo após a interação 1900: 0.140872
+precisão no conjunto de treinamento: 99.04306220095694 \%
+precisão no conjunto de teste: 70.0 \%
+
+    \end{Verbatim}
+
+    \textbf{Saída Esperada}:
+
+\begin{verbatim}
+<tr>
+    <td> **Custo após a interação 0 **  </td> 
+    <td> 0.693147 </td>
+</tr>
+  <tr>
+    <td> <center> $\vdots$ </center> </td> 
+    <td> <center> $\vdots$ </center> </td> 
+</tr>  
+<tr>
+    <td> **Precisão no conjunto de treinamento**  </td> 
+    <td> 99.04306220095694 % </td>
+</tr>
+
+<tr>
+    <td>**Precisão no conjunto de teste** </td> 
+    <td> 70.0 % </td>
+</tr>
+\end{verbatim}
+
+    \textbf{Comentários}: A precisão no conjunto de treinamento é próxima a
+100\%. Esta é uma verificação saudável: o modelo está funcionando e tem
+capacidade de se ajustar aos dados de treinamento. A precisão no
+conjunto de testes é da ordem de 70\%. Isto não é tão ruim se levarmos
+em conta a simplicidade do modelo e o tamanho reduzido do conjunto de
+treinamento e que a regressão logística é um classificador linear. Mas
+não se preocupe, você irá construir um modelo melhor nas próximas aulas.
+
+Um outro detalhe, é possível ver que o modelo está "sobreajustando" os
+dados de treinamento. Mas para frente iremos ver como reduzir o
+"sobreajuste", por exemplo, utilizando regularização. Utilize o código
+abaixo (e modifique o \texttt{indice}) para ver outras previsões do
+conjunto de teste.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} Exemplo de uma imagem classificada erradamente.}
+         \PY{n}{indice} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{indice}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{,} \PY{n}{num\PYZus{}px}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{indice}\PY{p}{]}\PY{p}{)}  \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, você preveu que é uma imagem }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}prediction\PYZus{}test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{indice}\PY{p}{]}\PY{p}{)} \PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y = 0, você preveu que é uma imagem 1.0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Vamos plotar a função de custo e os gradientes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} Plotar a curva de aprendizado (com custos)}
+         \PY{n}{costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{costs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{costs}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iterações (* 100)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Taxa de aprendizado =}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Interpretação}: Você pode ver que o custo decresce. Isto mostra
+que os parâmetros estão sendo aprendidos. Porém, você percebe que
+poderia treinar o modelo ainda mais neste conjunto de treinamento. Tente
+aumentar o número de interações nas células acima e execute novamente.
+Você irá perceber que a precisão no conjunto de treinamento aumenta mas
+que no conjunto de teste a precisão diminui. Isto se chama "sobreajuste"
+(overfitting).
+
+    \subsection{6 - Análises adicionais (opcional/exercício não
+avaliado)}\label{anuxe1lises-adicionais-opcionalexercuxedcio-nuxe3o-avaliado}
+
+Parabéns na construção do seu primeiro modelo de classificação de
+imagens. Vamos analisar um pouco mais e examinar possiveis escolhas para
+o valor da taxa de aprendizado \(\alpha\).
+
+    \paragraph{Escolha da taxa de
+aprendizado}\label{escolha-da-taxa-de-aprendizado}
+
+\textbf{Lembre-se}: Para que o gradiente descendente funcione você deve
+selecionar uma taxa de aprendizado com sabedoria. A taxa de aprendizado
+\(\alpha\) determina a velocidade com que os parâmetros são atualizados.
+Se a taxa é muito grande você pode passar ("overshoot") o valor ótimo.
+De forma semelhante, se o valor for muito pequeno, você irá precisar de
+muitas interações para convergir para o valor ótimo. Por isso é
+necessário utilizar uma taxa de aprendizado bem ajustada.
+
+Vamos comparar a curva de aprendizado de nosso modelo com taxas de
+aprendizado diferentes. Execute a célula abaixo, deve levar em torno de
+1 minuto. Sinta-se a vontade para tentar valores diferentes que os
+utilizados no array \texttt{learning\_rates} para ver o que acontece.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{learning\PYZus{}rates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+m+mf}{0.0001}\PY{p}{]}
+         \PY{n}{models} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{learning\PYZus{}rates}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Taxa de aprendizado é: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+             \PY{n}{models}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{modelo}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{learning\PYZus{}rates}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{models}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{costs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{models}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interações}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{legend} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{frame} \PY{o}{=} \PY{n}{legend}\PY{o}{.}\PY{n}{get\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{frame}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0.90}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Taxa de aprendizado é: 0.01
+precisão no conjunto de treinamento: 99.52153110047847 \%
+precisão no conjunto de teste: 70.0 \%
+
+-------------------------------------------------------
+
+Taxa de aprendizado é: 0.001
+precisão no conjunto de treinamento: 91.38755980861244 \%
+precisão no conjunto de teste: 68.0 \%
+
+-------------------------------------------------------
+
+Taxa de aprendizado é: 0.0001
+precisão no conjunto de treinamento: 71.29186602870814 \%
+precisão no conjunto de teste: 40.0 \%
+
+-------------------------------------------------------
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Interpretação}: - Taxas de aprendizado diferentes dão custos
+diferentes e, portanto, resultados diferentes nas previsões. - Se a taxa
+de aprendizado é muito grande (0.01), o custo pode oscilar. Ela pode até
+divergir (embora neste exemplo, utilizando 0.01, ele ainda caba com um
+bom valor de custo). - Um custo menor não significa necessariamente um
+modelo melhor. Você deve verificar se esta ocorrendo sobreajustes. Isto
+ocorre quando a precisão no conjunto de treinamento é muito maior que a
+precisão no conjunto de teste. - Em deep learning, normalmente se
+recomenda que: - Escolha uma taxa de aprendizado que minimize a função
+de custo. - Se o modelo sobreajustar, utilize técnicas para reduzir o
+sobreajuste (iremos tratar disto mais a frente)
+
+    \subsection{7 - Teste com sua própria imagem (opcional/exercício não
+avaliado)}\label{teste-com-sua-pruxf3pria-imagem-opcionalexercuxedcio-nuxe3o-avaliado}
+
+Parabéns, você concluiu esta tarefa. Você pode utilizar uma imagem
+qualquer e verificar a saída do seu modelo. Para isso faça: 1. Clique na
+TAB "File" na barra superior deste notebook, e clique em "Open" para ir
+para o seu Hub. 2. Adicione a sua imagem para o diretório "images" do
+Notebook Jupiter. 3. Troque o nome da sua imagem no código abaixo. 4.
+Execute o código e verifique se o algoritmo esta correto (1 = gato, 0 =
+não-gato)!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} INICIE O SEU CÓDIGO AQUI \PYZsh{}\PYZsh{} (coloque o nome da sua imagem aqui) }
+         \PY{n}{my\PYZus{}image} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my\PYZus{}image2.jpg}\PY{l+s+s2}{\PYZdq{}}                              \PY{c+c1}{\PYZsh{} troque a imagem para o seu arquivo }
+         \PY{c+c1}{\PYZsh{}\PYZsh{} TÉRMINO DO CÓDIGO \PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} Pré processamento da imagem para ajuste ao modelo.}
+         \PY{n}{fname} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{my\PYZus{}image}
+         \PY{n}{image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ndimage}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{fname}\PY{p}{,} \PY{n}{flatten}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{my\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imresize}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{,}\PY{n}{num\PYZus{}px}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}px}\PY{o}{*}\PY{n}{num\PYZus{}px}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{my\PYZus{}predicted\PYZus{}image} \PY{o}{=} \PY{n}{prever}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{my\PYZus{}image}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{my\PYZus{}predicted\PYZus{}image}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, seu modelo preveu que a imagem é um }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{classes}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{my\PYZus{}predicted\PYZus{}image}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{]}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/bruno/anaconda3/lib/python3.5/site-packages/ipykernel\_launcher.py:7: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0.
+Use ``matplotlib.pyplot.imread`` instead.
+  import sys
+/home/bruno/anaconda3/lib/python3.5/site-packages/ipykernel\_launcher.py:8: DeprecationWarning: `imresize` is deprecated!
+`imresize` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``skimage.transform.resize`` instead.
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y = 1.0, seu modelo preveu que a imagem é um "cat"
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \textbf{O que lembrar desta tarefa:} 1. Preprocessar o conjunto de
+dados é importante. 2. Você implentou cada função separadamente:
+inicialização(), propagação(), otimização() e construiu um modelo(). 3.
+Ajustando a taxa de aprendizado (que é um exemplo de hyperparametro)
+pode afetar o desempenho do algoritmo significativamente.
+
+    Finalmente, gostaria de convidá-lo a tentar algumas coisas diferentes
+neste Notebook. Tenha certeza de ter salvado o seu trabalho e crie uma
+cópia para poder fazer as alterações sugeridas abaixo: - Modifique a
+taxa de aprendizado e o número de interações. - Tente métodos diferentes
+para inicializar os parâmetros e compare os resultados. - Teste outros
+preprocessamentos (centralizar os dados, ou dividir cada linha pelo
+desvio padrão)
+
+    Bibliografia: -
+http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/
+-
+https://stats.stackexchange.com/questions/211436/why-do-we-normalize-images-by-subtracting-the-datasets-image-mean-and-not-the-c
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
